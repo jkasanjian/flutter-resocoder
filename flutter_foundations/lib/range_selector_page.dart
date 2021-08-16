@@ -8,6 +8,7 @@ class RangeSelectorPage extends StatefulWidget {
 }
 
 class _RangeSelectorPageState extends State<RangeSelectorPage> {
+  final formKey = GlobalKey<FormState>();
   int _min = 0;
   int _max = 0;
 
@@ -19,6 +20,7 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
         title: Text('Select Range'),
       ),
       body: Form(
+        key: formKey,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -42,8 +44,10 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_forward),
         onPressed: () {
-          // TODO: validate the form
-          // TODO: navigate to the generator page
+          if (formKey.currentState.validate()) {
+            formKey.currentState.save();
+            // TODO: navigate to the generator page
+          }
         },
       ),
     );
@@ -70,9 +74,11 @@ class RangeSelectorTextFormField extends StatelessWidget {
         signed: true,
       ),
       validator: (value) {
-        return (value == null || int.tryParse(value) == null)
-            ? 'Must be an integer'
-            : null;
+        if (value == null || int.tryParse(value) == null) {
+          return 'Must be an integer';
+        } else {
+          return null;
+        }
       },
       onSaved: (newValue) => intValueSetter(int.parse(newValue ?? '')),
     );
