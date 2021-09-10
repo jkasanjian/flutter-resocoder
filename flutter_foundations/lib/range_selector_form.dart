@@ -4,10 +4,10 @@ typedef IntValueSetter = void Function(int value);
 
 class RangeSelectorForm extends StatelessWidget {
   const RangeSelectorForm({
-    Key key,
-    @required this.formKey,
-    @required this.minValueSetter,
-    @required this.maxValueSetter,
+    Key? key,
+    required this.formKey,
+    required this.minValueSetter,
+    required this.maxValueSetter,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
@@ -25,14 +25,14 @@ class RangeSelectorForm extends StatelessWidget {
           children: [
             RangeSelectorTextFormField(
               labelText: 'Minimum',
-              intValueSetter: (value) => minValueSetter,
+              intValueSetter: minValueSetter,
             ),
             SizedBox(
               height: 12,
             ),
             RangeSelectorTextFormField(
               labelText: 'Maximum',
-              intValueSetter: (value) => maxValueSetter,
+              intValueSetter: maxValueSetter,
             ),
           ],
         ),
@@ -43,7 +43,7 @@ class RangeSelectorForm extends StatelessWidget {
 
 class RangeSelectorTextFormField extends StatelessWidget {
   const RangeSelectorTextFormField(
-      {Key key, @required this.labelText, @required this.intValueSetter})
+      {Key? key, required this.labelText, required this.intValueSetter})
       : super(key: key);
 
   final String labelText;

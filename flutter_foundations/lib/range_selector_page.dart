@@ -3,7 +3,7 @@ import 'package:flutter_foundations/randomizer_page.dart';
 import 'package:flutter_foundations/range_selector_form.dart';
 
 class RangeSelectorPage extends StatefulWidget {
-  RangeSelectorPage({Key key}) : super(key: key);
+  RangeSelectorPage({Key? key}) : super(key: key);
 
   @override
   _RangeSelectorPageState createState() => _RangeSelectorPageState();
@@ -29,8 +29,8 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_forward),
         onPressed: () {
-          if (formKey.currentState.validate()) {
-            formKey.currentState.save();
+          if (formKey.currentState?.validate() == true) {
+            formKey.currentState?.save();
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => RandomizerPage(min: _min, max: _max),
